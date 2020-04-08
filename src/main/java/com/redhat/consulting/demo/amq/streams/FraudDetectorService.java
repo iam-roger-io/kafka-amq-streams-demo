@@ -30,12 +30,12 @@ public class FraudDetectorService {
 			
 			if (!records.isEmpty()) {
 
-				System.out.println("Encontrei " + records.count() + "registros");
+				System.out.println("Encontrei " + records.count() + " registros");
 
 				for (ConsumerRecord record : records) {
 
-					System.out.print("========================================================================");
-					System.out.print("Processing nwew order, checking for fraude ");
+					System.out.println("========================================================================");
+					System.out.println("Processing nwew order, checking for fraude ");
 					System.out.println("key" + record.key());
 					System.out.println("Value: " + record.value());
 					System.out.println("Partition: " + record.partition());
