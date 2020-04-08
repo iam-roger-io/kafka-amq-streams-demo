@@ -10,6 +10,11 @@ import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.common.serialization.StringDeserializer;
 
+/**
+ * 
+ * @author Rogerio L Santos
+ *
+ */
 public class FraudDetectorService {
 
 	public static void main(String args[]) {
@@ -33,8 +38,8 @@ public class FraudDetectorService {
 					System.out.print("Processing nwew order, checking for fraude ");
 					System.out.println("key" + record.key());
 					System.out.println("Value: " + record.value());
-					System.out.println("Partition" + record.partition());
-					System.out.println("Record" + record.offset());
+					System.out.println("Partition: " + record.partition());
+					System.out.println("Record: " + record.offset());
 
 					try {
 						Thread.sleep(5000);
