@@ -41,7 +41,7 @@ public class FraudDetectorService {
 					System.out.println("Record: " + record.offset());
 
 					try {
-						Thread.sleep(5000);
+						Thread.sleep(1);
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch blockvsco
 						e.printStackTrace();
