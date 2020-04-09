@@ -3,6 +3,7 @@ package com.redhat.consulting.demo.amq.streams;
 import java.time.Duration;
 import java.util.Collections;
 import java.util.Properties;
+import java.util.UUID;
 
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
@@ -61,7 +62,16 @@ public class FraudDetectorService {
 		properties.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
 
 		properties.put(ConsumerConfig.GROUP_ID_CONFIG, FraudDetectorService.class.getSimpleName());
-
+		
+		//Give a friendly name to client
+		properties.setProperty(ConsumerConfig.CLIENT_ID_CONFIG, FraudDetectorService.class.getSimpleName() + "-" + UUID.randomUUID().toString());
+		
+		/*
+		 * Quantidade maxima de recors recebidos simultaneamente. 
+		 * Neste exemplo foi diminuido para garantir o commit da mensagem recebida mais rapido.
+		 */
+		properties.setProperty(ConsumerConfig.MAX_POLL_RECORDS_CONFIG, "1");
+        
 		return properties;
 	}
 
