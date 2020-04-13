@@ -1,5 +1,7 @@
 package com.redhat.consulting.demo.amq.streams;
 
+import java.util.HashMap;
+
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 
 public class EmailService {
@@ -8,7 +10,9 @@ public class EmailService {
     	EmailService emailService = new EmailService();
         try (KafkaService service = new KafkaService(EmailService.class.getSimpleName(),
                 "ECOMMERCE_SEND_EMAIL",
-                emailService::parse)) {
+                emailService::parse,
+                String.class,
+                new HashMap())) {
             service.run();
         }
     }
