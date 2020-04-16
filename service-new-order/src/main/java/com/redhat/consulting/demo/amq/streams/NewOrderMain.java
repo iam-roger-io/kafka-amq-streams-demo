@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 import java.util.UUID;
 import java.util.concurrent.ExecutionException;
 
-import com.redhat.consulting.demo.amq.streams.model.Order;
 
 public class NewOrderMain {
 
@@ -12,18 +11,19 @@ public class NewOrderMain {
 				
 		KafkaDispatcher<String> emailrDispatcher = new KafkaDispatcher<String>();
 		KafkaDispatcher<Order> orderDispatcher = new KafkaDispatcher<Order>();
-			
+		String email = Math.random() + "@redhat.com"; 
 		for (int i = 0; i < 10; i++) {
 
 			String userId = UUID.randomUUID().toString();
 			String orderId = UUID.randomUUID().toString();
 			BigDecimal amount = new BigDecimal(Math.random() * 5000 + 1);
-			Order order = new Order(userId, orderId, amount);
+			
+			Order order = new Order(orderId, amount, email);
 						
-			orderDispatcher.send("ECOMMERCE_NEW_ORDER", userId, order);
+			orderDispatcher.send("ECOMMERCE_NEW_ORDER", email, order);
 
-			String email = "Thank you for your order! We are processing your order!";						
-			emailrDispatcher.send("ECOMMERCE_SEND_EMAIL", userId, email);
+			String emailCode = "Thank you for your order! We are processing your order!";						
+			emailrDispatcher.send("ECOMMERCE_SEND_EMAIL", email, emailCode);
 		
 		}
 				
